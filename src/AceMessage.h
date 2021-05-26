@@ -4,6 +4,4 @@
 #include "Arduino.h"
 #include "msg.h"
 
-
-
 #endif  //  ACEMESSAGE_H
