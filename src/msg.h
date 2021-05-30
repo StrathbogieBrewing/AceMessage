@@ -16,7 +16,7 @@ enum {
   MSG_NULL = 0x7000,
 };
 
-#define MSG_FMT(M) (M & 0x8000)
+#define MSG_FMT(M) (M & 0x7000)
 
 enum {
   MSG_BYTE_0 = 0x0000,

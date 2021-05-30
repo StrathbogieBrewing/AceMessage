@@ -131,9 +131,9 @@ int msg_format(msg_data_t *data, const int pack, char *str) {
     _itoa(str, MSG_TWODIGITS, value);
   } else if (format == MSG_BOOL) {
     if (value)
-      strcpy(str, "On");
+      strcpy(str, "true"); // compatible with json
     else
-      strcpy(str, "Off");
+      strcpy(str, "false");
   } else {
     _itoa(str, format, value);
   }
