@@ -50,7 +50,7 @@ typedef struct {
   const int pack;
 } msg_name_t;
 
-void msg_pack(msg_data_t *data, int pack, int value);
+void msg_pack(msg_data_t *data, const int pack, int value);
 int msg_unpack(msg_data_t *data, const int pack, int *value);
 int msg_format(msg_data_t *data, const int pack, char *str);
 
