@@ -2,6 +2,6 @@
 #define ACEMESSAGE_H
 
 #include "Arduino.h"
-#include "msg.h"
+#include "sig.h"
 
 #endif  //  ACEMESSAGE_H
