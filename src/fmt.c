@@ -7,13 +7,27 @@ static uint8_t toString(char *str, int16_t value, fmt_t format) {
   uint8_t enable_digits = 0;
   char *ptr;
   ptr = str;
-  if (value < 0) {  // do sign
-    value = -value;
-    *str++ = '-';
+
+  uint16_t unsignedValue = (uint16_t)value;
+  if((format & FMT_UINT) == 0){
+    if (value < 0) {  // do sign
+      unsignedValue = (uint16_t)(-value);
+      *str++ = '-';
+    }
   }
+
+  //  else {
+  //   if (value < 0) {  // do sign
+  //     unsignedValue = -value;
+  //     *str++ = '-';
+  //   } else {
+  //     unsignedValue = value;
+  //   }
+  // }
+
   digit = '0';  // do 10000's
-  while (value > 9999) {
-    value -= 10000;
+  while (unsignedValue > 9999) {
+    unsignedValue -= 10000;
     digit++;
   }
   if ((digit != '0') || (enable_digits != 0)) {
@@ -21,8 +35,8 @@ static uint8_t toString(char *str, int16_t value, fmt_t format) {
     enable_digits = 1;
   }
   digit = '0';  // do 1000's
-  while (value > 999) {
-    value -= 1000;
+  while (unsignedValue > 999) {
+    unsignedValue -= 1000;
     digit++;
   }
   if ((digit != '0') || (enable_digits != 0)) {
@@ -30,8 +44,8 @@ static uint8_t toString(char *str, int16_t value, fmt_t format) {
     enable_digits = 1;
   }
   digit = '0';  // do 100's
-  while (value > 99) {
-    value -= 100;
+  while (unsignedValue > 99) {
+    unsignedValue -= 100;
     digit++;
   }
   if (format == FMT_MILL) {
@@ -46,8 +60,8 @@ static uint8_t toString(char *str, int16_t value, fmt_t format) {
     enable_digits = 1;
   }
   digit = '0';  // do 10's
-  while (value > 9) {
-    value -= 10;
+  while (unsignedValue > 9) {
+    unsignedValue -= 10;
     digit++;
   }
   if (format == FMT_CENT) {
@@ -60,7 +74,7 @@ static uint8_t toString(char *str, int16_t value, fmt_t format) {
     *str++ = digit;
     enable_digits = 1;
   }
-  digit = '0' + value;  // do 1's
+  digit = '0' + unsignedValue;  // do 1's
   if (format == FMT_DECI) {
     if (enable_digits == 0){
       *str++ = '0';
@@ -87,6 +101,8 @@ uint8_t fmt_toString(char *str, int16_t value, fmt_t format){
       strcpy(str, "true");
     else
       strcpy(str, "false");
+  } else if (format == FMT_NULL){
+    strcpy(str, "null");
   } else {
     toString(str, value, format);
   }

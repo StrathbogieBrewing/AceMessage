@@ -17,7 +17,11 @@ fmt_t sig_decode(msg_t *msg, uint32_t sig, int16_t *value){
   }
   uint8_t offset = SIG_OFFSET(sig);
   if (SIG_SIZE(sig) == SIG_BYTE) {
-    *value = (int8_t)msg_getU8(msg, offset);
+    if(sig & SIG_UINT){
+      *value = msg_getU8(msg, offset);
+    } else {
+      *value = (int8_t)msg_getU8(msg, offset);  // extend sign of byte
+    }
   } else if (SIG_SIZE(sig) == SIG_WORD) {
     *value = msg_getU16(msg, offset);
   } else {

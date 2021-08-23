@@ -8,6 +8,16 @@
 extern "C" {
 #endif
 
+#define SIG_PRIORITY_HIGHEST  (0x0000)
+#define SIG_PRIORITY_HIGHHIGH (0x8000)
+#define SIG_PRIORITY_HIGHMED  (0xC000)
+#define SIG_PRIORITY_MEDHIGH  (0xE000)
+#define SIG_PRIORITY_MEDIUM   (0xF000)
+#define SIG_PRIORITY_MEDLOW   (0xF800)
+#define SIG_PRIORITY_LOWMED   (0xFC00)
+#define SIG_PRIORITY_LOWLOW   (0xFE00)
+#define SIG_PRIORITY_LOWEST   (0xFF00)
+
 #define SIG_UNIT ((uint32_t)FMT_UNIT << 16)  // display at least one digit
 #define SIG_MILL ((uint32_t)FMT_MILL << 16)  // make fixed point with 3 decimal places
 #define SIG_CENT ((uint32_t)FMT_CENT << 16)  // make fixed point with 2 decimal places
@@ -16,6 +26,7 @@ extern "C" {
 #define SIG_TIME ((uint32_t)FMT_TIME << 16)  // display as a time
 #define SIG_BOOL ((uint32_t)FMT_BOOL << 16)  // display as on / off
 #define SIG_NULL ((uint32_t)FMT_NULL << 16)
+#define SIG_UINT ((uint32_t)FMT_UINT << 16)
 #define SIG_FORMAT(M) ((M & 0x00FF0000) >> 16)
 
 #define SIG_OFF0 0x00000000
