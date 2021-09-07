@@ -14,16 +14,9 @@ static uint8_t toString(char *str, int16_t value, fmt_t format) {
       unsignedValue = (uint16_t)(-value);
       *str++ = '-';
     }
+  } else {
+    format &= ~FMT_UINT;  // clear unsigned flag
   }
-
-  //  else {
-  //   if (value < 0) {  // do sign
-  //     unsignedValue = -value;
-  //     *str++ = '-';
-  //   } else {
-  //     unsignedValue = value;
-  //   }
-  // }
 
   digit = '0';  // do 10000's
   while (unsignedValue > 9999) {
