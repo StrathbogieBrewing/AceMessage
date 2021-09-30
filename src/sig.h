@@ -41,7 +41,11 @@ extern "C" {
 
 #define SIG_BYTE 0x00000000
 #define SIG_WORD 0x10000000
-#define SIG_SIZE(M) (M & 0xF0000000)
+#define SIG_SIZE(M) (M & 0x70000000)
+
+#define SIG_RW 0x80000000
+#define SIG_RO 0x00000000
+#define SIG_ACCESS(M) (M & 0x80000000)
 
 #define SIG_MSG_ID(M) (M & 0x0000FFFF)
 

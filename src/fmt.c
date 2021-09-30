@@ -86,9 +86,11 @@ uint8_t fmt_toString(char *str, int16_t value, fmt_t format){
       ++hours;
       value -= 60;
     }
+    *str++ = '\"';
     str += toString(str, hours, FMT_2DGT);
     *str++ = ':';
     toString(str, value, FMT_2DGT);
+    *str++ = '\"';
   } else if (format == FMT_BOOL) {
     if (value)
       strcpy(str, "true");
