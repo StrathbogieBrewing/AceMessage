@@ -49,6 +49,11 @@ extern "C" {
 
 #define SIG_MSG_ID(M) (M & 0x0000FFFF)
 
+#define SIG_DIVU16BY10(X) (((uint32_t)(X) * 6554UL) >> 16L)
+#define SIG_DIVU16BY100(X) (((uint32_t)(X) * 655UL) >> 16L)
+#define SIG_DIVS16BY10(X) (((int32_t)(X) * 6554L) >> 16L)
+#define SIG_DIVS16BY100(X) (((int32_t)(X) * 655L) >> 16L)
+
 void sig_encode(msg_t *msg, uint32_t sig, int16_t value);
 fmt_t sig_decode(msg_t *msg, uint32_t sig, int16_t *value);
 uint8_t sig_toString(msg_t *msg, uint32_t sig, char *str);
