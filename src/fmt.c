@@ -2,6 +2,18 @@
 
 #include "fmt.h"
 
+// void hexDump(char *tag, uint8_t *buffer, int size) {
+//   int i = 0;
+//   Serial.print(tag);
+//   Serial.print(" : ");
+//   while (i < size) {
+//     Serial.print(buffer[i] >> 4, HEX);
+//     Serial.print(buffer[i++] & 0x0F, HEX);
+//     Serial.print(" ");
+//   }
+//   Serial.println();
+// }
+
 static uint8_t toString(char *str, int16_t value, fmt_t format) {
   uint8_t digit;
   uint8_t enable_digits = 0;

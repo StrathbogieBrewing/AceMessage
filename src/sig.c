@@ -1,6 +1,6 @@
 #include "sig.h"
 
-void sig_encode(msg_t *msg, uint32_t sig, int16_t value){
+uint8_t sig_encode(msg_t *msg, uint32_t sig, int16_t value){
   msg_setID(msg, SIG_MSG_ID(sig));
   uint8_t offset = SIG_OFFSET(sig);
   if (SIG_SIZE(sig) == SIG_BYTE) {
@@ -9,6 +9,7 @@ void sig_encode(msg_t *msg, uint32_t sig, int16_t value){
   if (SIG_SIZE(sig) == SIG_WORD) {
     msg_setU16(msg, offset, value);
   }
+  return SIG_MSG_SIZE(sig);
 }
 
 fmt_t sig_decode(msg_t *msg, uint32_t sig, int16_t *value){

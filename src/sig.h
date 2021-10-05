@@ -3,20 +3,21 @@
 
 #include "msg.h"
 #include "fmt.h"
+// #include "AceBus.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define SIG_PRIORITY_HIGHEST  (0x0000)
-#define SIG_PRIORITY_HIGHHIGH (0x8000)
-#define SIG_PRIORITY_HIGHMED  (0xC000)
-#define SIG_PRIORITY_MEDHIGH  (0xE000)
-#define SIG_PRIORITY_MEDIUM   (0xF000)
-#define SIG_PRIORITY_MEDLOW   (0xF800)
-#define SIG_PRIORITY_LOWMED   (0xFC00)
-#define SIG_PRIORITY_LOWLOW   (0xFE00)
-#define SIG_PRIORITY_LOWEST   (0xFF00)
+// #define SIG_PRIORITY_HIGHEST  (AceBus_kPriorityHighest  << 8)
+// #define SIG_PRIORITY_HIGHHIGH (AceBus_kPriorityHighhigh << 8)
+// #define SIG_PRIORITY_HIGHMED  (AceBus_kPriorityHighmed  << 8)
+// #define SIG_PRIORITY_MEDHIGH  (AceBus_kPriorityMedhigh  << 8)
+// #define SIG_PRIORITY_MEDIUM   (AceBus_kPriorityMedium   << 8)
+// #define SIG_PRIORITY_MEDLOW   (AceBus_kPriorityMedlow   << 8)
+// #define SIG_PRIORITY_LOWMED   (AceBus_kPriorityLowmed   << 8)
+// #define SIG_PRIORITY_LOWLOW   (AceBus_kPriorityLowlow   << 8)
+// #define SIG_PRIORITY_LOWEST   (AceBus_kPriorityLowest   << 8)
 
 #define SIG_UNIT ((uint32_t)FMT_UNIT << 16)  // display at least one digit
 #define SIG_MILL ((uint32_t)FMT_MILL << 16)  // make fixed point with 3 decimal places
@@ -47,14 +48,25 @@ extern "C" {
 #define SIG_RO 0x00000000
 #define SIG_ACCESS(M) (M & 0x80000000)
 
-#define SIG_MSG_ID(M) (M & 0x0000FFFF)
+#define SIG_MSG_ID(M) (M & 0x000000FF)
+
+// size includes 1 extra byte for the msg id
+#define SIG_SIZE1 0x00000200
+#define SIG_SIZE2 0x00000300
+#define SIG_SIZE3 0x00000400
+#define SIG_SIZE4 0x00000500
+#define SIG_SIZE5 0x00000600
+#define SIG_SIZE6 0x00000700
+#define SIG_SIZE7 0x00000800
+#define SIG_SIZE8 0x00000900
+#define SIG_MSG_SIZE(M) ((M & 0x0000FF00) >> 8)
 
 #define SIG_DIVU16BY10(X) (((uint32_t)(X) * 6554UL) >> 16L)
 #define SIG_DIVU16BY100(X) (((uint32_t)(X) * 655UL) >> 16L)
 #define SIG_DIVS16BY10(X) (((int32_t)(X) * 6554L) >> 16L)
 #define SIG_DIVS16BY100(X) (((int32_t)(X) * 655L) >> 16L)
 
-void sig_encode(msg_t *msg, uint32_t sig, int16_t value);
+uint8_t sig_encode(msg_t *msg, uint32_t sig, int16_t value);
 fmt_t sig_decode(msg_t *msg, uint32_t sig, int16_t *value);
 uint8_t sig_toString(msg_t *msg, uint32_t sig, char *str);
 
